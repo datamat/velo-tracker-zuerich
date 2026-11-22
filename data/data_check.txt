@@ -1,0 +1,184 @@
+Data check 2026-11-22 – folders: D:\nfa_data\4_projects\velo_map
+
+## Velonetzplanung (Velovorzugsrouten) (velonetz)
+   snapshot 2026-11-22
+   file velonetz__view_gs_umsetzungsstrecken.geojson: 36 features, {'MultiLineString': 36}, lines 135.3 km
+      abschnitt: Stadtgrenze (Schlieren) - Bhf Altstetten (1), Letzigraben - Sihl (1), Stadtgrenze (Büsisee) - Herbstweg (1), Stadtgrenze (Katzensee) - Scheuchzerstrasse (1), Stadtgrenze (Opfikon) - Affolternstrasse (1), Triemli - Bhf Altstetten (1), Andreasstrassse/Bhf Stettbach - Bhf Oerlikon (1), Altwiesenstrasse - Quaibrücke / Rämistrasse  (1), Gutstrasse - Hohlstrasse (1), Witikonerstrasse - Voltastrasse (1), Arosastrasse - Rämistrasse (1), Maneggbrücke - Tannenrauchstrasse (1) … 36 distinct
+      bezeichnung: Juchhof - Vulkanstrasse - Bahnhof Altstetten  (1), Letzigraben - Sihlhölzli (1), Katzenbach - Seebach - Schwamendingen (1), Katzensee - Affoltern - Milchbuck (1), Opfikon - Seebach - Oerlikon (1), Triemli - Bahnhof Altstetten (1), Stettbach - Schwamendingen - Oerlikonerstrasse (inkl. Herzogenmühlestrasse) (1), Schwamendingen - Irchel - Hottingen - Stadelhofen - Bellevue (1), Wiedikon - Bullingerplatz - Hohlstrasse  (1), Witikon - Fluntern (1), Tiefenbrunnen - Limmatquai - Rämistrasse (1), Manegg - Wollishofen (1) … 36 distinct
+      geometrie_gdo: None (36)
+      id1: 17 (1), 19 (1), 2 (1), 1 (1), 3 (1), 15 (1), 5 (1), 6 (1), 22 (1), 7 (1), 9 (1), 28 (1) … 36 distinct
+      nummer: 17 (1), 19 (1), 2 (1), 1 (1), 3 (1), 15 (1), 5 (1), 6 (1), 22 (1), 7 (1), 9 (1), 28 (1) … 36 distinct
+      objectid: 4702 (1), 4703 (1), 4705 (1), 4704 (1), 4706 (1), 4712 (1), 4707 (1), 4708 (1), 4729 (1), 4709 (1), 4710 (1), 4737 (1) … 36 distinct
+   file velonetz__view_velonetz.geojson: 4701 features, {'LineString': 4701}, lines 550.6 km
+      geometrie_gdo: None (4701)
+      id1: 360.0 (1), 361.0 (1), 362.0 (1), 365.0 (1), 367.0 (1), 371.0 (1), 373.0 (1), 376.0 (1), 377.0 (1), 363.0 (1), 364.0 (1), 382.0 (1) … 4701 distinct
+      kategorie: Basisnetz (2232), Hauptnetz (1248), Vorzugsroute (1221)
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 4701 distinct
+
+## Aktuelle Tiefbauprojekte (tiefbau)
+   snapshot 2026-11-22
+   file tiefbau__aer_baustellen_a.geojson: 148 features, {'MultiPolygon': 148}, lines 0.0 km
+      adresse: None (148)
+      baubeginn: 20270101 (22), 20261001 (19), 20270104 (7), 20260817 (4), 20260601 (4), 20261102 (4), 20260921 (3), 20261109 (3), 20260914 (3), 20260202 (3), 20260427 (2), 20261101 (2) … 78 distinct
+      baubereich: Limmatquai bis Niederdorfstrasse (3), Seilergraben bis Zähringerstrasse (2), Platzfläche (2), Gesamtperimeter (2), Am Rank bis Mühlegasse (2), Gabler- bis Brunaustrasse (1), Ueberlandstrasse - Winterthurerstrasse 374 (1), Thurgauerstrasse - SBB Gleisfeld (1), Glatttalstrasse bis Stiglenstrasse (1), Binzmühlestrasse 156 (1), Niederdorfstrasse bis Zähringerstrasse (1), Niederdorfstrasse bis Hof (1) … 142 distinct
+      bauende: 20271231 (19), 20261231 (13), 20270430 (10), 20270331 (7), 20261127 (7), 20261218 (5), 20261215 (4), 20270630 (4), 20270531 (3), 20261130 (3), 20270723 (3), 20280131 (2) … 74 distinct
+      baunr: 16024 (1), 14099 (1), 17028 (1), 17143 (1), 19106 (1), 19914 (1), 19974 (1), 19926 (1), 19952 (1), 19904 (1), 19907 (1), 19916 (1) … 148 distinct
+      foto: NEIN (148)
+      geometrie_gdo: None (148)
+      id_proj_taz_z: 5704 (1), 5264 (1), 5840 (1), 5982 (1), 6470 (1), 6499 (1), 6503 (1), 6513 (1), 6538 (1), 6489 (1), 6492 (1), 6501 (1) … 148 distinct
+      kategorie: Grössere Baustelle (148)
+      kreis: 1 (31), 9 (26), 2 (14), 11 (14), 6 (13), 12 (9), 8 (9), 3 (8), 4 (7), 7 (6), 5 (6), 10 (5)
+      name: Preyergasse (2), Witellikerstrasse (2), Limmatquai (2), Zähringerstrasse (2), Scheuchzerstrasse (2), Niederdorfstrasse (2), Seebacherstrasse (2), Scheideggstrasse, Steinhaldenstrasse (1), Schwamendingenstrasse (1), Thurgauerstrasse Quartierpark (1), Mattackerstrasse (1), Binzmühlestrasse (1) … 141 distinct
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 148 distinct
+      plz: None (148)
+      poi_id: None (148)
+      projektbeschrieb: Leitungen der Wasserversorgung Zürich (WVZ), von Energie 360° und ewz werden im gesamten Nieder- und Oberdorf bis Ende 2027 saniert. (4), Im Quartier werden Gas-, Wasser- und Stromleitungen saniert. Zusätzlich werden die Arbeiten archäologisch begleitet. (2), An der Steinhaldenstrasse wird die Strasse inklusive Trottoirs erneuert und im Bereich Brunnenhof eine platzartige Gestaltung umgesetzt. Zusätzlich wird eine Begegnungszone eingeführt, Leitungen erneuert und die Abflusskapazität der Kanalisation ausgebaut. (1), An der Schwamendingenstrasse und im Riedgrabenweg werden Beläge erneuert, Trottoirs verbreitert und die Veloinfrastruktur verbessert. Gleichzeitig erfolgen Arbeiten an Leitungen und Beleuchtung. (1), Auf dem Areal Thurgauerstrasse wird ein Quartierpark realisiert. (1), Die Stadt erneuert Wasserleitungen und den Strassenbelag. (1), In der Binzmühlestrasse wird im Zusammenhang mit dem Hochbau für die neue Feuerwehrwache Zürich-Nord eine neue Ausfahrt mit Verkehrsregelungsanlage gebaut.  (1), Im Strassenraum werden Leitungen saniert, Pflästerungen erneuert und eine hindernisfreie Gestaltung geprüft. Die Arbeiten werden archäologisch begleitet. (1), Im Quartier werden Leitungen erneuert und die Oberfläche erneuert. (1), Im Strassenraum werden Leitungen erneuert und die Oberfläche hindernisfrei gestaltet. (1), Es werden Gasleitungen und Kabelanlagen erneuert. Zudem wird geprüft, wie der Platz für Menschen mit Behinderung besser nutzbar gemacht werden kann. Archäologische Untersuchungen begleiten die Arbeiten. (1), An der Strasse werden Gas-, Wasser- und Stromleitungen erneuert.  (1) … 144 distinct
+      projektleiter: Andre Palancon (19), Roger Moser (5), Sascha Bieler (5), Ivo Majic (4), Markus Deiss (4), Andreas Hochuli (4), Redzep Zairi (4), Matthias Meier (3), Eshref Nuhija (3), Mira Elsohn (3), Bünyamin Özdemir (3), Tanja Heck (3) … 77 distinct
+      projektleiter_email: Andre.Palancon@zuerich.ch (19), Roger.Moser@zuerich.ch (5), Sascha.Bieler@zuerich.ch (5), ivo.majic@ewz.ch (4), Markus.Deiss@zuerich.ch (4), Andreas.Hochuli@zuerich.ch (4), redzep.zairi@ewz.ch (4), Matthias.Meier@zuerich.ch (3), eshref.nuhija@ewz.ch (3), mira.elsohn@zuerich.ch (3), Buenyamin.Oezdemir@zuerich.ch (3), Tanja.Heck@zuerich.ch (3) … 77 distinct
+      publish_internet: 1 (148)
+      stand: 20261121 (148)
+      suchen: Projekt Bauen Tiefbauamt Strassenbau Baustelle Preyergasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Witellikerstrasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Limmatquai (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Zähringerstrasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Scheuchzerstrasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Niederdorfstrasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Seebacherstrasse (2), Projekt Bauen Tiefbauamt Strassenbau Baustelle Scheideggstrasse, Steinhaldenstrasse (1), Projekt Bauen Tiefbauamt Strassenbau Baustelle Schwamendingenstrasse (1), Projekt Bauen Tiefbauamt Strassenbau Baustelle Thurgauerstrasse Quartierpark (1), Projekt Bauen Tiefbauamt Strassenbau Baustelle Mattackerstrasse (1), Projekt Bauen Tiefbauamt Strassenbau Baustelle Binzmühlestrasse (1) … 141 distinct
+      tel: +41 44 412 27 40 (19), +41 44 412 22 81 (5), +41 44 412 33 31 (5), +41 58 319 46 38 (4), +41 44 412 27 80 (4), +41 44 412 46 59 (4), +41 58 319 27 62 (4), +41 44 412 22 58 (3), +41 58 319 46 24 (3), +41 44 412 13 30 (3), +41 44 412 26 42 (3), +41 44 415 22 83 (3) … 77 distinct
+      titel: Preyergasse (2), Witellikerstrasse (2), Limmatquai (2), Zähringerstrasse (2), Scheuchzerstrasse (2), Niederdorfstrasse (2), Seebacherstrasse (2), Scheideggstrasse, Steinhaldenstrasse (1), Schwamendingenstrasse (1), Thurgauerstrasse Quartierpark (1), Mattackerstrasse (1), Binzmühlestrasse (1) … 141 distinct
+      url_infoseite: None (125), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/nieder-und-oberdorf.html (6), https://www.stadt-zuerich.ch/rathausbruecke (2), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/altstetten-ost.html (2), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/in-planung/quartierpark-thurgauerstrasse.html (1), https://www.stadt-zuerich.ch/dam/web/de/planen-bauen/projekte-und-ausschreibungen/dokumente/tiefbau/planauflagen/AP3_ZH_GT_Z_OeV3_ZH.pdf (1), https://company.sbb.ch/de/ueber-die-sbb/projekte/deutschschweiz/region-zuerich/ausbau-zuerich-stadelhofen/bauprojekte.html (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/wehrenbachhalde.html (1), https://www.stadt-zuerich.ch/scheuchzerstrasse (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/hochbauvorhaben/planung-ausfuehrung/freibad-auhof.html (1), https://www.zh.ch/de/planen-bauen/wasserbau/wasserbauprojekte/erneuerung-platzspitzwehr.html (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/Birchstrasse.html (1) … 17 distinct
+      www: https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/nieder-und-oberdorf.html (6), https://www.stadt-zuerich.ch/rathausbruecke (2), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/altstetten-ost.html (2), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=5704 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=5264 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/in-planung/quartierpark-thurgauerstrasse.html (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=5982 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=6470 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=6499 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=6503 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=6513 (1), https://www.stadt-zuerich.ch/de/planen-und-bauen/projekte-und-ausschreibungen/strassen-freiraum/baustellen/baustellen-info.html?id=6538 (1) … 141 distinct
+      x: None (148)
+      y: None (148)
+
+## Standorte der Velozählungen (zaehlstellen)
+   snapshot 2026-11-22
+   file zaehlstellen__view_eco_standorte.geojson: 175 features, {'Point': 175}, lines 0.0 km
+      abkuerzung: FZS_HARD (11), FZS_LETD (9), FZS_LETL (8), FZS_CHOR (8), VZS_BINZ (6), VZS_LANS (6), FZS_CASS (6), VZS_SCHU (5), VZS_SIHL (5), VZS_LANN (5), FZS_KATZ (5), VZS_HOFW (4) … 57 distinct
+      bezeichnung: Hardeggsteg (11), Langstrasse (Unterführung Süd) (9), Letten / Dynamo (9), Lettenviadukt (Limmatstr.) (8), Chorherrenweg (8), Langstrasse (Unterführung Nord) (7), Binzmühlestrasse (6), Cassiopeiasteg (6), Schulstrasse (5), Sihlpromenade (5), Katzenbach (5), Hofwiesenstrasse (4) … 54 distinct
+      bis: None (25), 2023-03-23T00:00:00.000 (12), 2015-03-31T00:00:00.000 (5), 2015-10-01T00:00:00.000 (4), 2016-09-30T00:00:00.000 (4), 2017-10-04T00:00:00.000 (4), 2017-04-10T00:00:00.000 (4), 2019-03-13T00:00:00.000 (3), 2018-12-21T00:00:00.000 (3), 2019-06-18T00:00:00.000 (3), 2018-10-01T00:00:00.000 (3), 2021-09-21T00:00:00.000 (3) … 96 distinct
+      fk_zaehler: U15G3063869 (17), U15G3063873 (10), U15G4025180 (9), U15G3104443 (7), U15G3104442 (7), U15G3063866 (5), ECO09113500 (4), Y2H16039396 (4), U15G3063867 (4), U15G3104445 (3), YPH15108550 (3), U15G3063865 (3) … 86 distinct
+      fuss: 1 (90), 0 (85)
+      geometrie_gdo: None (175)
+      has_geschwindigkeit: 0.0 (167), 1.0 (8)
+      id1: 7 (1), 16 (1), 53 (1), 13 (1), 61 (1), 5 (1), 60 (1), 6 (1), 54 (1), 57 (1), 58 (1), 59 (1) … 175 distinct
+      korrekturfaktor: 1.0 (25), 0.86 (11), 1.27 (9), 0.95 (9), 0.89 (9), 0.79 (8), 0.74 (8), 1.22 (6), 1.07 (6), 0.91 (6), 1.43 (5), 1.02 (5) … 42 distinct
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 175 distinct
+      richtung_in: Innenstadt (20), Limmat (16), Limmatplatz (15), Kloster-Fahr-Weg (11), Stadtgrenze (10), Helvetiaplatz (9), Oerlikon (8), Bellevue (8), Seeufer (8), Bhf. Altstetten (5), Affoltern (5), Bucheggplatz (4) … 38 distinct
+      richtung_out: Hauptbahnhof (14), Hardturmstrasse (11), --- (9), Gleisanlagen (8), Meierhofplatz (8), Limmatplatz (8), Bellevue (7), Wollishofen (6), Glaubtenstrasse (5), Innenstadt (5), Saalsporthalle (5), Irchel (5) … 40 distinct
+      status: früher (150), aktuell (25)
+      velo: 0 (88), 1 (87)
+      von: 2015-03-31T00:00:00.000 (5), 2013-11-28T00:00:00.000 (5), 2013-07-11T00:00:00.000 (5), 2015-10-01T00:00:00.000 (4), 2016-10-01T00:00:00.000 (4), 2017-10-05T00:00:00.000 (4), 2010-09-23T00:00:00.000 (3), 2014-03-11T00:00:00.000 (3), 2019-06-19T00:00:00.000 (3), 2016-04-01T00:00:00.000 (3), 2017-04-11T00:00:00.000 (3), 2018-12-21T00:00:00.000 (3) … 114 distinct
+
+## Fuss- und Velowegnetz (velowegnetz)
+   snapshot 2026-11-22
+   file velowegnetz__tbl_routennetz.geojson: 40467 features, {'LineString': 40467}, lines 2631.8 km
+      einbahn: 0 (38575), FT (1041), TF (798),   (53)
+      fuss: 1 (31263), 0 (9204)
+      geometrie_gdo: None (40467)
+      id1: 137 (1), 138 (1), 139 (1), 140 (1), 141 (1), 142 (1), 143 (1), 144 (1), 145 (1), 146 (1), 147 (1), 148 (1) … 40467 distinct
+      map_fuss: 0 (35816), 2 (2764), 1 (1885), None (2)
+      map_velo: 0 (34097), 1 (4213), 3 (1535), 2 (568), 5 (31), 6 (21), None (2)
+      name: Fussweg (3004), FH Sihlfeld Fussweg (433), Park (309), Badenerstrasse (298), Schaffhauserstrasse (253), Birmensdorferstrasse (223), Parkplatz (213), Witikonerstrasse (199), Winterthurerstrasse (179), Hohlstrasse (164), Wehntalerstrasse (159), Irchelpark (144) … 4172 distinct
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 40467 distinct
+      se_anno_cad_data: None (40467)
+      velo: 0 (27623), 1 (12844)
+      velostreifen: 0 (39476), BOTH (351), FT (292), TF (253),   (93), None (1), 1 (1)
+      veloweg: 0 (39335), 1 (1132)
+   file velowegnetz__tbl_routennetz_abbiegeverbote.geojson: 1023 features, {'LineString': 1023}, lines 9.1 km
+      geometrie_gdo: None (1023)
+      id1: 108.0 (1), 109.0 (1), 110.0 (1), 111.0 (1), 112.0 (1), 113.0 (1), 114.0 (1), 115.0 (1), 116.0 (1), 117.0 (1), 118.0 (1), 119.0 (1) … 1023 distinct
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 1023 distinct
+      se_anno_cad_data: None (1023)
+
+## Masterplan Velo (2018) (masterplan)
+   snapshot 2026-11-22
+   file masterplan__view_eco_standorte.geojson: 175 features, {'Point': 175}, lines 0.0 km
+      abkuerzung: FZS_HARD (11), FZS_LETD (9), FZS_LETL (8), FZS_CHOR (8), VZS_BINZ (6), VZS_LANS (6), FZS_CASS (6), VZS_SCHU (5), VZS_SIHL (5), VZS_LANN (5), FZS_KATZ (5), VZS_HOFW (4) … 57 distinct
+      bezeichnung: Hardeggsteg (11), Langstrasse (Unterführung Süd) (9), Letten / Dynamo (9), Lettenviadukt (Limmatstr.) (8), Chorherrenweg (8), Langstrasse (Unterführung Nord) (7), Binzmühlestrasse (6), Cassiopeiasteg (6), Schulstrasse (5), Sihlpromenade (5), Katzenbach (5), Hofwiesenstrasse (4) … 54 distinct
+      bis: None (25), 2023-03-23T00:00:00.000 (12), 2015-03-31T00:00:00.000 (5), 2015-10-01T00:00:00.000 (4), 2016-09-30T00:00:00.000 (4), 2017-10-04T00:00:00.000 (4), 2017-04-10T00:00:00.000 (4), 2019-03-13T00:00:00.000 (3), 2018-12-21T00:00:00.000 (3), 2019-06-18T00:00:00.000 (3), 2018-10-01T00:00:00.000 (3), 2021-09-21T00:00:00.000 (3) … 96 distinct
+      fk_zaehler: U15G3063869 (17), U15G3063873 (10), U15G4025180 (9), U15G3104443 (7), U15G3104442 (7), U15G3063866 (5), ECO09113500 (4), Y2H16039396 (4), U15G3063867 (4), U15G3104445 (3), YPH15108550 (3), U15G3063865 (3) … 86 distinct
+      fuss: 1 (90), 0 (85)
+      geometrie_gdo: None (175)
+      has_geschwindigkeit: 0.0 (167), 1.0 (8)
+      id1: 7 (1), 16 (1), 53 (1), 13 (1), 61 (1), 5 (1), 60 (1), 6 (1), 54 (1), 57 (1), 58 (1), 59 (1) … 175 distinct
+      korrekturfaktor: 1.0 (25), 0.86 (11), 1.27 (9), 0.95 (9), 0.89 (9), 0.79 (8), 0.74 (8), 1.22 (6), 1.07 (6), 0.91 (6), 1.43 (5), 1.02 (5) … 42 distinct
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1), 6 (1), 7 (1), 8 (1), 9 (1), 10 (1), 11 (1), 12 (1) … 175 distinct
+      richtung_in: Innenstadt (20), Limmat (16), Limmatplatz (15), Kloster-Fahr-Weg (11), Stadtgrenze (10), Helvetiaplatz (9), Oerlikon (8), Bellevue (8), Seeufer (8), Bhf. Altstetten (5), Affoltern (5), Bucheggplatz (4) … 38 distinct
+      richtung_out: Hauptbahnhof (14), Hardturmstrasse (11), --- (9), Gleisanlagen (8), Meierhofplatz (8), Limmatplatz (8), Bellevue (7), Wollishofen (6), Glaubtenstrasse (5), Innenstadt (5), Saalsporthalle (5), Irchel (5) … 40 distinct
+      status: früher (150), aktuell (25)
+      velo: 0 (88), 1 (87)
+      von: 2015-03-31T00:00:00.000 (5), 2013-11-28T00:00:00.000 (5), 2013-07-11T00:00:00.000 (5), 2015-10-01T00:00:00.000 (4), 2016-10-01T00:00:00.000 (4), 2017-10-05T00:00:00.000 (4), 2010-09-23T00:00:00.000 (3), 2014-03-11T00:00:00.000 (3), 2019-06-19T00:00:00.000 (3), 2016-04-01T00:00:00.000 (3), 2017-04-11T00:00:00.000 (3), 2018-12-21T00:00:00.000 (3) … 114 distinct
+
+## VBZ-Baustellen (vbz_baustellen)
+   snapshot 2026-11-22
+   file vbz_baustellen__poi_vbz_baustelle_view.geojson: 5 features, {'Point': 5}, lines 0.0 km
+      adr_inter:  (5)
+      adresse: Bürkliplatz 1 (2), Bahnhofquai/HB (1), Hofwiesenstrasse 56c (1), Kreuzplatz_Test (1)
+      adrzus_int:  (5)
+      behindertenparkplatz: 0 (5)
+      bemerkung:  (3), VBZ-Test POI (1), Die Baustelle am Kreuzplatz dauert noch bis 31. Oktober 2025 (1)
+      ccmail:  (5)
+      da: Verkehrsbetriebe (5)
+      datum: 202511271337 (1), 202510211644 (1), 202511271340 (1), 202601290853 (1), 202510201606 (1)
+      datum_cms: None (5)
+      dep: Departement der industriellen Betriebe (DIB) (5)
+      editor: vbzmberto (5)
+      erforderlichedokumente:  (5)
+      fax:  (5)
+      geometrie_gdo: None (5)
+      hausnummer: 1 (2),  (2), 56c (1)
+      hindernisfreiheit: 0__ (5)
+      infrastruktur: ;NULL (5)
+      isbetriebsferien_gebaeude: 1 (4), 0 (1)
+      isbetriebsferien_schalter: 0 (5)
+      kategorie: VBZ-Baustelle (5)
+      mail:  (5)
+      name: Streetparade test (1), Gleisbau Bahnhofquai (1), STREETPARADE_TEST (1), Schweissarbeiten Laubiweg (1), Gleisbaustelle Kreuzplatz (1)
+      namenzus:  (5)
+      objectid: 1 (1), 2 (1), 3 (1), 4 (1), 5 (1)
+      oeffnungszeiten_gebaeude_di: n.a. (5)
+      oeffnungszeiten_gebaeude_do: n.a. (5)
+      oeffnungszeiten_gebaeude_fr: n.a. (5)
+      oeffnungszeiten_gebaeude_mi: n.a. (5)
+      oeffnungszeiten_gebaeude_mo: n.a. (5)
+      oeffnungszeiten_gebaeude_sa: n.a. (5)
+      oeffnungszeiten_gebaeude_so: n.a. (5)
+      oeffnungszeiten_schalter_di: n.a. (5)
+      oeffnungszeiten_schalter_do: n.a. (5)
+      oeffnungszeiten_schalter_fr: n.a. (5)
+      oeffnungszeiten_schalter_mi: n.a. (5)
+      oeffnungszeiten_schalter_mo: n.a. (5)
+      oeffnungszeiten_schalter_sa: n.a. (5)
+      oeffnungszeiten_schalter_so: n.a. (5)
+      ort: Zürich (5)
+      plz: 8001 (3), 8050 (1), 8032 (1)
+      poi_id: bst16053 (1), bst16038 (1), bst16054 (1), bst16074 (1), bst15504 (1)
+      postadresse:  (5)
+      publish_internet: 0 (5)
+      strasse: Bürkliplatz (2),  (2), Hofwiesenstrasse (1)
+      suchen:  (5)
+      tel:  (5)
+      tel2:  (5)
+      www:  (5)
+      zahlungsmittel_internet: NULL;NULL; (5)
+      zahlungsmittel_schalter: NULL;NULL; (5)
+      zahlungsmittel_telefon: NULL;NULL; (5)
+      zvv_label: Bürkliplatz 1 (2), Bahnhofquai/HB (1), Hofwiesenstrasse 56c (1), Kreuzplatz_Test (1)
+      zvv_link: https://www.zvv.ch/de/fahrplan-und-informationen/fahrplan.html?tolat=47.366655183453&tolon=8.5406679163065&toname=Zürich, Bürkliplatz 1 (2), https://www.zvv.ch/de/fahrplan-und-informationen/fahrplan.html?tolat=47.377474532779&tolon=8.54180526214679&toname= (1), https://www.zvv.ch/de/fahrplan-und-informationen/fahrplan.html?tolat=47.3950213763521&tolon=8.5364192729075&toname=Zürich, Hofwiesenstrasse 56c (1), https://www.zvv.ch/de/fahrplan-und-informationen/fahrplan.html?tolat=47.3649525067102&tolon=8.55405748859049&toname= (1)
+
+## Implemented km (S4 + S5) from the layer: 0.00 km (keyword guess)
+   City figure: 7.17 km (Stand 20 Nov 2026). Close match = the layer is current.
+
+## Accidents
+   70767 rows, columns: AccidentUID, AccidentType, AccidentType_de, AccidentType_fr, AccidentType_it, AccidentType_en, AccidentSeverityCategory, AccidentSeverityCategory_de, AccidentSeverityCategory_fr, AccidentSeverityCategory_it, AccidentSeverityCategory_en, AccidentInvolvingPedestrian, AccidentInvolvingBicycle, AccidentInvolvingMotorcycle, RoadType, RoadType_de, RoadType_fr, RoadType_it, RoadType_en, AccidentLocation_CHLV95_E, AccidentLocation_CHLV95_N, CantonCode, MunicipalityCode, AccidentYear, AccidentMonth, AccidentMonth_de, AccidentMonth_fr, AccidentMonth_it, AccidentMonth_en, AccidentWeekDay, AccidentWeekDay_de, AccidentWeekDay_fr, AccidentWeekDay_it, AccidentWeekDay_en, AccidentHour, AccidentHour_text
+   years 2011–2025, bike accidents 8753
+   per year: 2011: 335, 2012: 356, 2013: 362, 2014: 424, 2015: 536, 2016: 584, 2017: 614, 2018: 692, 2019: 695, 2020: 761, 2021: 632, 2022: 776, 2023: 659, 2024: 677, 2025: 650
+
+## Counts
+   2015_verkehrszaehlungen_werte_fussgaenger_velo.csv: 51 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 33
+   2016_verkehrszaehlungen_werte_fussgaenger_velo.csv: 54 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 33
+   2017_verkehrszaehlungen_werte_fussgaenger_velo.csv: 60 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 41
+   2018_verkehrszaehlungen_werte_fussgaenger_velo.csv: 62 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 41
+   2019_verkehrszaehlungen_werte_fussgaenger_velo.csv: 56 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 41
+   2020_verkehrszaehlungen_werte_fussgaenger_velo.csv: 57 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 37
+   2021_verkehrszaehlungen_werte_fussgaenger_velo.csv: 53 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 37
+   2022_verkehrszaehlungen_werte_fussgaenger_velo.csv: 54 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 33
+   2023_verkehrszaehlungen_werte_fussgaenger_velo.csv: 43 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 35
+   2024_verkehrszaehlungen_werte_fussgaenger_velo.csv: 42 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 27
+   2025_verkehrszaehlungen_werte_fussgaenger_velo.csv: 38 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 25
+   2026_verkehrszaehlungen_werte_fussgaenger_velo.csv: 30 MB, columns FK_STANDORT, DATUM, VELO_IN, VELO_OUT, FUSS_IN, FUSS_OUT, OST, NORD, sites in first rows 24

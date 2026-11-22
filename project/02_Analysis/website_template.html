@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velo Tracker Zürich</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F5F2EA'/%3E%3Ccircle cx='18' cy='40' r='10' fill='none' stroke='%231F2A24' stroke-width='4'/%3E%3Ccircle cx='46' cy='40' r='10' fill='none' stroke='%231F2A24' stroke-width='4'/%3E%3Cpath d='M18 40l10-16h12l6 16M28 24l6 16' fill='none' stroke='%23eb6834' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<style>
+:root{--bg:#F5F2EA;--ink:#1F2A24;--soft:#3A443E;--muted:#6E736B;--line:#DDD8CC;--panel:#FBFAF6}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Work Sans",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:36px 24px 96px}
+.lang{display:flex;justify-content:flex-end;gap:2px;margin-bottom:18px}
+.lang a{font-size:13.5px;letter-spacing:.04em;text-decoration:none;color:var(--muted);padding:4px 9px;border-radius:3px}
+.lang a.on{color:var(--ink);background:#E7E1D3;font-weight:600}
+h1{font:600 clamp(40px,6.4vw,70px)/1.02 Fraunces,Georgia,serif;margin:0 0 16px;letter-spacing:-.015em}
+h2{font:600 clamp(24px,3.2vw,32px)/1.12 Fraunces,Georgia,serif;margin:0 0 10px}
+p{margin:0 0 12px}
+a{color:inherit}
+.lede{font-size:clamp(17px,2vw,20px);max-width:760px;color:var(--soft)}
+.note{color:var(--muted);font-size:13.5px}
+section{padding:56px 0;border-top:1px solid var(--line)}
+.top{padding-top:0;border-top:0}
+.intro{max-width:760px;color:var(--soft);margin-bottom:22px}
+.figure{font:600 clamp(22px,2.6vw,28px)/1.25 Fraunces,Georgia,serif;margin:22px 0 6px;max-width:820px}
+.figure em{font-style:normal;color:#c9521f}
+.controls{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin:0 0 12px;font-size:14.5px}
+.controls label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.controls select{font:inherit;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.controls .sep{width:1px;height:22px;background:var(--line)}
+#map{height:min(76vh,760px);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:12px;font-size:13.5px;color:var(--soft)}
+.legend .ramp{display:flex;align-items:center;gap:6px}
+.legend .ramp i{display:inline-block;width:22px;height:10px}
+.legend .item{display:inline-flex;align-items:center;gap:7px;margin-right:14px}
+.legend .line{display:inline-block;width:22px;height:4px;border-radius:2px}
+.legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#2a78d6;border:2px solid #fff;box-shadow:0 0 0 1px #2a78d6}
+.maplibregl-popup-content{font:13.5px/1.45 "Work Sans",system-ui,sans-serif;padding:10px 14px;border-radius:5px}
+.maplibregl-popup-content b{font-weight:600}
+.maplibregl-popup-content table{border-collapse:collapse;margin-top:4px}
+.maplibregl-popup-content td{padding:1px 8px 1px 0;vertical-align:top;color:var(--soft)}
+table.data{border-collapse:collapse;font-size:14.5px;margin:6px 0 10px}
+table.data td,table.data th{padding:5px 18px 5px 0;border-bottom:1px solid var(--line);text-align:left}
+table.data td.n,table.data th.n{text-align:right;font-variant-numeric:tabular-nums}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:8px;vertical-align:-1px}
+.cal{overflow-x:auto}
+.cal canvas{display:block}
+.tip{position:fixed;pointer-events:none;background:#1F2A24;color:#F5F2EA;font-size:13px;padding:5px 9px;border-radius:4px;display:none;z-index:9;white-space:nowrap}
+.chart svg{display:block;max-width:100%}
+.chart text{font:12.5px "Work Sans",system-ui,sans-serif;fill:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+ol.src{padding-left:20px;font-size:14px;color:var(--soft)}
+ol.src li{margin-bottom:6px}
+.empty{padding:22px;border:1px dashed var(--line);border-radius:6px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<nav class="lang" id="lang"></nav>
+
+<section class="top">
+  <h1 id="title"></h1>
+  <p class="lede" id="lede"></p>
+  <p class="figure" id="figure"></p>
+  <p class="note" id="figurenote"></p>
+</section>
+
+<section>
+  <h2 id="maptitle"></h2>
+  <p class="intro" id="mapintro"></p>
+  <div class="controls" id="controls"></div>
+  <div id="map"></div>
+  <div class="legend" id="legend"></div>
+  <p class="note" id="mapnote" style="margin-top:10px"></p>
+</section>
+
+<section>
+  <div class="two">
+    <div>
+      <h2 id="acctitle"></h2>
+      <p class="intro" id="accintro"></p>
+      <div class="chart" id="accchart"></div>
+    </div>
+    <div>
+      <h2 id="nettitle"></h2>
+      <p class="intro" id="netintro"></p>
+      <div id="nettable"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="caltitle"></h2>
+  <p class="intro" id="calintro"></p>
+  <div class="controls"><label><span id="callabel"></span> <select id="calsite"></select></label></div>
+  <div class="cal" id="cal"></div>
+  <div class="legend" id="callegend"></div>
+</section>
+
+<section>
+  <h2 id="pacetitle"></h2>
+  <p class="intro" id="paceintro"></p>
+  <div class="chart" id="pacechart"></div>
+</section>
+
+<section>
+  <h2 id="methodtitle"></h2>
+  <div class="intro" id="method"></div>
+  <h2 id="srctitle" style="margin-top:34px"></h2>
+  <ol class="src" id="sources"></ol>
+  <p class="note" id="author"></p>
+</section>
+</main>
+<div class="tip" id="tip"></div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+const ORANGE = ["#fde3d6", "#f9c3a7", "#f4a078", "#eb6834", "#c9521f", "#9e3e15", "#6e2a0d"];
+const BLUE = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"];
+const STATUS_COL = {S0: "#b9b5aa", S1: "#a7d3a0", S2: "#6fb46a", S3: "#3f9440", S4: "#1f7232", S5: "#0b4a1f", "": "#8a8a84"};
+const LANGS = ["de", "en"];
+
+const TX = {
+  de: {
+    title: "Velo Tracker Zürich",
+    lede: "Wo die Stadt Zürich ihr Velonetz baut, wo es stockt und wo es kracht. Alle Zahlen stammen aus offenen Daten der Stadt; jede Zahl nennt ihre Quelle und ihr Datum.",
+    figure: (km, tot, d) => `<em>${km} km</em> von ${tot} km Velovorzugsrouten sind umgesetzt.`,
+    figurenote: (d, src, pace, need) => `Stadt Zürich, Stand ${d} (<a href="${src}">Quelle</a>). Eigene Berechnung aus den Zahlen der Stadt: bisher ${pace} km pro Jahr gebaut; für das ganze Netz bis Ende 2031 braucht es ${need} km pro Jahr.`,
+    maptitle: "Karte",
+    mapintro: "Sechseck-Raster der polizeilich registrierten Velounfälle (150 m), darüber das Velonetz nach Umsetzungsstand und die automatischen Zählstellen. Klicken zeigt Details.",
+    layers: {hex: "Velounfälle", net: "Velonetz", cnt: "Zählstellen", works: "Baustellen"},
+    years: "Jahre", to: "bis", sev: "Unfälle", sevopt: ["alle", "mit Verletzten", "schwer oder tödlich"], d3: "3D",
+    hexleg: "Velounfälle pro Sechseck", cntleg: "Zählstelle (Grösse = Velos pro Tag)", worksleg: "Tiefbauprojekt",
+    hexpop: (n, y0, y1) => `<b>${n} Velounfälle</b><br>${y0}–${y1}`,
+    sevnames: ["nur Sachschaden", "leicht verletzt", "schwer verletzt oder getötet"],
+    netpop: "Velonetz", status: "Stand", length: "Länge", cntpop: (n, m, d) => `<b>${n}</b><br>${m} Velos pro Tag (Mittel der letzten 12 Monate, ${d} Zähltage)`,
+    mapnote: (d) => `Unfälle: Bundesamt für Strassen ASTRA, Stadt Zürich. Velonetz: Stadt Zürich, Tiefbauamt, Stand ${d}. Hintergrundkarte: swisstopo.`,
+    acctitle: "Velounfälle pro Jahr",
+    accintro: "Polizeilich registrierte Unfälle mit Velo- oder E-Bike-Beteiligung in der Stadt Zürich. Ohne Bezug zur Zahl der Fahrten.",
+    nettitle: "Velonetz nach Stand",
+    netintro: (d) => `Länge der Abschnitte im Datensatz Velonetzplanung, Stand ${d}. Eigene Berechnung.`,
+    netguess: "Zuordnung der Kategorien noch nicht bestätigt (Stichwort-Schätzung).",
+    nethead: ["Stand", "km"], nostatus: "Stand unbekannt", basenet: "übriges Velonetz",
+    caltitle: "Wann Zürich Velo fährt",
+    calintro: (c) => `Velos pro Tag an einer Zählstelle, ein Kästchen pro Tag. ${c ? "Mit den Korrekturfaktoren der Stadt." : "Rohwerte, ohne Korrekturfaktoren."} Leere Kästchen: keine vollständige Zählung.`,
+    callabel: "Zählstelle", calleg: "Velos pro Tag",
+    days: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+    pacetitle: "Tempo",
+    paceintro: "Umgesetzte Kilometer laut Stadt Zürich (Punkte) und das Tempo, das für 130 km bis Ende 2031 nötig wäre (Linie, eigene Berechnung). Die Stadt hat die Definition zwischen den Meldungen teils angepasst.",
+    pacelab: ["umgesetzt (Stadt)", "nötiges Tempo bis 2031"],
+    methodtitle: "Methode",
+    method: [
+      "<b>Unfälle.</b> Alle polizeilich registrierten Unfälle mit Velo-Beteiligung (inkl. E-Bike), gezählt in Sechsecken von 150 m Breite im Schweizer Koordinatensystem LV95. Höhe und Farbe zeigen die Anzahl in den gewählten Jahren. Unfälle zeigen, wo es kracht, nicht wie gefährlich eine Strecke pro Fahrt ist.",
+      "<b>Velonetz.</b> Abschnitte des Datensatzes Velonetzplanung, eingefärbt nach den sechs Kategorien der städtischen Karte. Längen eigene Berechnung.",
+      "<b>Zählstellen.</b> Viertelstundenwerte beider Richtungen, zu Tagen summiert. Ein Tag zählt nur bei vollständiger Zählung.",
+      "<b>Wöchentliche Momentaufnahme.</b> Jeden Montag wird das Velonetz gespeichert. Mit der Zeit entsteht daraus die Geschichte des Netzes."
+    ],
+    srctitle: "Quellen",
+    built: (d) => `Seite erstellt am ${d}.`,
+    author: "Matthias Häni. Persönliches Projekt, unabhängig von der Stadt Zürich. Code offen auf GitHub, geschrieben mit Hilfe von Claude (Anthropic).",
+    nodata: "Noch keine Daten – zuerst 1_Collect_data.bat ausführen.",
+    loaded: "Datenstand"
+  },
+  en: {
+    title: "Velo Tracker Zürich",
+    lede: "Where the City of Zurich is building its bike network, where it is stuck, where bikes crash. Every figure comes from the city's open data, with its source and date.",
+    figure: (km, tot, d) => `<em>${km} km</em> of ${tot} km of priority bike routes are in place.`,
+    figurenote: (d, src, pace, need) => `City of Zurich, as of ${d} (<a href="${src}">source</a>). Own calculation from the city's figures: ${pace} km built per year so far; the full network by end 2031 needs ${need} km a year.`,
+    maptitle: "Map",
+    mapintro: "Hexagon grid of police-registered bike accidents (150 m), with the bike network by implementation status plus the automatic counting sites on top. Click for details.",
+    layers: {hex: "Bike accidents", net: "Bike network", cnt: "Counters", works: "Roadworks"},
+    years: "Years", to: "to", sev: "Accidents", sevopt: ["all", "with injuries", "severe or fatal"], d3: "3D",
+    hexleg: "Bike accidents per hexagon", cntleg: "Counter (size = bikes per day)", worksleg: "Civil-engineering project",
+    hexpop: (n, y0, y1) => `<b>${n} bike accidents</b><br>${y0}–${y1}`,
+    sevnames: ["property damage only", "light injuries", "severe injuries or fatal"],
+    netpop: "Bike network", status: "Status", length: "Length", cntpop: (n, m, d) => `<b>${n}</b><br>${m} bikes a day (mean of the last 12 months, ${d} count days)`,
+    mapnote: (d) => `Accidents: Federal Roads Office FEDRO (ASTRA), City of Zurich. Network: City of Zurich, Tiefbauamt, as of ${d}. Base map: swisstopo.`,
+    acctitle: "Bike accidents per year",
+    accintro: "Police-registered accidents involving a bike or e-bike in the City of Zurich. Not related to the number of trips.",
+    nettitle: "Network by status",
+    netintro: (d) => `Length of sections in the Velonetzplanung dataset, as of ${d}. Own calculation.`,
+    netguess: "Category mapping not yet confirmed (keyword guess).",
+    nethead: ["Status", "km"], nostatus: "status unknown", basenet: "other bike network",
+    caltitle: "When Zurich rides",
+    calintro: (c) => `Bikes per day at one counting site, one square per day. ${c ? "With the city's correction factors." : "Raw values, without correction factors."} Empty squares: no complete count.`,
+    callabel: "Counting site", calleg: "Bikes per day",
+    days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    pacetitle: "Pace",
+    paceintro: "Kilometres in place according to the City of Zurich (dots) and the pace needed for 130 km by end 2031 (line, own calculation). The city adjusted its definition between releases in places.",
+    pacelab: ["in place (city)", "pace needed to 2031"],
+    methodtitle: "Method",
+    method: [
+      "<b>Accidents.</b> All police-registered accidents involving a bike (incl. e-bikes), counted in hexagons 150 m across in the Swiss LV95 grid. Height plus colour show the count in the selected years. Accidents show where bikes crash, not how risky a street is per trip.",
+      "<b>Network.</b> Sections of the Velonetzplanung dataset, coloured by the six categories of the city map. Lengths are own calculations.",
+      "<b>Counters.</b> Quarter-hour values of both directions, summed to days. A day counts only with a complete count.",
+      "<b>Weekly snapshot.</b> Every Monday the network is saved. Over time this builds the history of the network."
+    ],
+    srctitle: "Sources",
+    built: (d) => `Page built on ${d}.`,
+    author: "Matthias Häni. Personal project, independent of the City of Zurich. Open code on GitHub, written with help from Claude (Anthropic).",
+    nodata: "No data yet – run 1_Collect_data.bat first.",
+    loaded: "Data as of"
+  }
+};
+
+let L = "de", tx = TX.de, map = null, popup = null;
+const state = {y0: null, y1: null, sev: 0, hex: true, net: true, cnt: true, works: false, d3: true};
+const $ = id => document.getElementById(id);
+const set = (id, html) => { const e = $(id); if (e) e.innerHTML = html; };
+const nf = (x, d = 0) => new Intl.NumberFormat(L === "de" ? "de-CH" : "en-GB", {maximumFractionDigits: d, minimumFractionDigits: d}).format(x);
+const fdate = s => { if (!s) return ""; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString(L === "de" ? "de-CH" : "en-GB", {day: "numeric", month: L === "de" ? "numeric" : "short", year: "numeric"}); };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const tip = $("tip");
+function showTip(ev, html) { tip.innerHTML = html; tip.style.display = "block"; tip.style.left = (ev.clientX + 14) + "px"; tip.style.top = (ev.clientY + 14) + "px"; }
+function hideTip() { tip.style.display = "none"; }
+
+/* ---------- headline: official figures ---------- */
+function officialSeries() {
+  return (DATA.official || []).filter(r => r.metric === "implemented").map(r => ({d: new Date(r.date), v: +r.value, r})).sort((a, b) => a.d - b.d);
+}
+function headline() {
+  const s = officialSeries();
+  if (!s.length) return;
+  const last = s[s.length - 1], first = s[0];
+  const tot = DATA.targets.network_km;
+  const yrs = (last.d - first.d) / 31557600000;
+  const pace = yrs > 0 ? (last.v - first.v) / yrs : null;
+  const end = new Date(DATA.targets.target_year + "-12-31");
+  const need = (tot - last.v) / ((end - last.d) / 31557600000);
+  set("figure", tx.figure(nf(last.v, 2), nf(tot), fdate(last.r.date)));
+  set("figurenote", tx.figurenote(fdate(last.r.date), last.r.source_url, pace === null ? "–" : nf(pace, 1), nf(need, 0)));
+}
+
+/* ---------- map ---------- */
+function hexValues() {
+  const A = DATA.accidents; if (!A) return {type: "FeatureCollection", features: []};
+  const i0 = A.years.indexOf(state.y0), i1 = A.years.indexOf(state.y1);
+  const feats = [];
+  for (const h of A.hexes) {
+    let n = 0;
+    for (let i = i0; i <= i1; i++) for (let s = state.sev; s < 3; s++) n += h.c[i][s];
+    if (n > 0) feats.push({type: "Feature", geometry: {type: "Polygon", coordinates: [h.r]}, properties: {n}});
+  }
+  return {type: "FeatureCollection", features: feats};
+}
+function hexBreaks(fc) {
+  const v = fc.features.map(f => f.properties.n).sort((a, b) => a - b);
+  if (!v.length) return [1, 2, 3, 4, 5, 6];
+  const q = p => v[Math.min(v.length - 1, Math.floor(p * v.length))];
+  const b = [q(.35), q(.6), q(.78), q(.9), q(.96), q(.99)];
+  for (let i = 1; i < b.length; i++) if (b[i] <= b[i - 1]) b[i] = b[i - 1] + 1;
+  return b;
+}
+function hexPaint(fc) {
+  const b = hexBreaks(fc), max = Math.max(1, ...fc.features.map(f => f.properties.n));
+  const color = ["step", ["get", "n"], ORANGE[0]];
+  b.forEach((x, i) => color.push(x, ORANGE[i + 1]));
+  return {color, b, max};
+}
+function baseStyle() {
+  return fetch("https://vectortiles.geo.admin.ch/styles/ch.swisstopo.lightbasemap.vt/style.json")
+    .then(r => { if (!r.ok) throw 0; return "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.lightbasemap.vt/style.json"; })
+    .catch(() => ({version: 8, sources: {c: {type: "raster", tiles: ["https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"], tileSize: 256,
+      attribution: "© OpenStreetMap contributors © CARTO"}}, layers: [{id: "c", type: "raster", source: "c"}]}));
+}
+function networkFC() {
+  const fs = [];
+  for (const l of (DATA.network ? DATA.network.layers : [])) for (const f of l.features) { f.properties.L = l.name; f.properties.hasS = l.status_field ? 1 : 0; fs.push(f); }
+  return {type: "FeatureCollection", features: fs};
+}
+function countersFC() {
+  const C = DATA.counters; if (!C) return {type: "FeatureCollection", features: []};
+  return {type: "FeatureCollection", features: C.sites.map(s => ({type: "Feature", geometry: {type: "Point", coordinates: [s.lon, s.lat]}, properties: {id: s.id, m: s.mean}}))};
+}
+async function initMap() {
+  if (!window.maplibregl) { set("map", `<div class="empty">Map library not loaded (offline?).</div>`); return; }
+  map = new maplibregl.Map({container: "map", style: await baseStyle(), center: [8.535, 47.378], zoom: 12.4, pitch: 45, bearing: -12,
+    attributionControl: {compact: true, customAttribution: "© swisstopo · Daten: Stadt Zürich, ASTRA"}});
+  map.addControl(new maplibregl.NavigationControl({visualizePitch: true}), "top-right");
+  map.on("load", () => {
+    const fc = hexValues(), p = hexPaint(fc);
+    map.addSource("hex", {type: "geojson", data: fc});
+    map.addLayer({id: "hex3d", type: "fill-extrusion", source: "hex", paint: {"fill-extrusion-color": p.color,
+      "fill-extrusion-height": ["*", ["/", ["get", "n"], p.max], 900], "fill-extrusion-opacity": .82}});
+    map.addLayer({id: "hex2d", type: "fill", source: "hex", layout: {visibility: "none"}, paint: {"fill-color": p.color, "fill-opacity": .78, "fill-outline-color": "rgba(255,255,255,.6)"}});
+    map.addSource("works", {type: "geojson", data: DATA.works || {type: "FeatureCollection", features: []}});
+    map.addLayer({id: "works", type: "fill", source: "works", filter: ["==", ["geometry-type"], "Polygon"], layout: {visibility: "none"}, paint: {"fill-color": "#6E736B", "fill-opacity": .22}});
+    map.addLayer({id: "worksl", type: "line", source: "works", layout: {visibility: "none"}, paint: {"line-color": "#6E736B", "line-width": 1.5, "line-dasharray": [2, 2]}});
+    map.addSource("net", {type: "geojson", data: networkFC()});
+    const col = ["match", ["get", "c"]]; for (const k of ["S0", "S1", "S2", "S3", "S4", "S5"]) col.push(k, STATUS_COL[k]); col.push(STATUS_COL[""]);
+    const round = {"line-cap": "round", "line-join": "round"};
+    map.addLayer({id: "netbase", type: "line", source: "net", filter: ["==", ["get", "hasS"], 0], paint: {"line-color": "#8a8a84", "line-opacity": .55, "line-width": ["interpolate", ["linear"], ["zoom"], 11, .8, 16, 2.5]}, layout: round});
+    map.addLayer({id: "netcase", type: "line", source: "net", filter: ["==", ["get", "hasS"], 1], paint: {"line-color": "#ffffff", "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3.5, 16, 9], "line-opacity": .9}, layout: round});
+    map.addLayer({id: "net", type: "line", source: "net", filter: ["==", ["get", "hasS"], 1], paint: {"line-color": col, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 2, 16, 5.5]}, layout: round});
+    map.addSource("cnt", {type: "geojson", data: countersFC()});
+    map.addLayer({id: "cnt", type: "circle", source: "cnt", paint: {"circle-color": "#2a78d6", "circle-stroke-color": "#fff", "circle-stroke-width": 2,
+      "circle-radius": ["interpolate", ["linear"], ["sqrt", ["get", "m"]], 0, 4, 30, 8, 100, 16]}});
+    map.on("click", "hex3d", e => hexPopup(e)); map.on("click", "hex2d", e => hexPopup(e));
+    map.on("click", "net", e => netPopup(e));
+    map.on("click", "cnt", e => cntPopup(e));
+    for (const id of ["hex3d", "hex2d", "net", "cnt", "works"]) { map.on("mouseenter", id, () => map.getCanvas().style.cursor = "pointer"); map.on("mouseleave", id, () => map.getCanvas().style.cursor = ""); }
+    applyState();
+  });
+}
+function openPopup(e, html) { if (popup) popup.remove(); popup = new maplibregl.Popup({maxWidth: "320px"}).setLngLat(e.lngLat).setHTML(html).addTo(map); }
+function hexPopup(e) { if (map.queryRenderedFeatures(e.point, {layers: ["cnt", "net"]}).length) return; openPopup(e, tx.hexpop(e.features[0].properties.n, state.y0, state.y1)); }
+function netPopup(e) {
+  if (map.queryRenderedFeatures(e.point, {layers: ["cnt"]}).length) return;
+  const p = e.features[0].properties, st = DATA.status.find(s => s.code === p.c), pp = typeof p.p === "string" ? JSON.parse(p.p) : p.p;
+  const rows = Object.entries(pp || {}).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("");
+  openPopup(e, `<b>${st ? st[L] : esc(p.v || tx.netpop)}</b><br>${tx.length}: ${nf(p.m)} m<table>${rows}</table>`);
+}
+function cntPopup(e) {
+  const s = DATA.counters.sites.find(x => x.id === e.features[0].properties.id);
+  openPopup(e, tx.cntpop(esc(s.name), nf(s.mean), nf(s.days)));
+  $("calsite").value = s.id; drawCalendar();
+}
+function applyState() {
+  if (!map || !map.getSource("hex")) return;
+  const fc = hexValues(), p = hexPaint(fc);
+  map.getSource("hex").setData(fc);
+  map.setPaintProperty("hex3d", "fill-extrusion-color", p.color);
+  map.setPaintProperty("hex3d", "fill-extrusion-height", ["*", ["/", ["get", "n"], p.max], 900]);
+  map.setPaintProperty("hex2d", "fill-color", p.color);
+  const vis = (id, on) => map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+  vis("hex3d", state.hex && state.d3); vis("hex2d", state.hex && !state.d3);
+  vis("net", state.net); vis("netcase", state.net); vis("netbase", state.net); vis("cnt", state.cnt); vis("works", state.works); vis("worksl", state.works);
+  map.easeTo({pitch: state.d3 ? 45 : 0, duration: 600});
+  legend(p);
+}
+function controls() {
+  const A = DATA.accidents;
+  const yopts = sel => (A ? A.years : []).map(y => `<option ${y === sel ? "selected" : ""}>${y}</option>`).join("");
+  const cb = (k, on) => `<label><input type="checkbox" data-k="${k}" ${on ? "checked" : ""}> ${tx.layers[k]}</label>`;
+  set("controls", [cb("hex", state.hex), cb("net", state.net), cb("cnt", state.cnt), cb("works", state.works), `<span class="sep"></span>`,
+    A ? `<label>${tx.years} <select id="y0">${yopts(state.y0)}</select> ${tx.to} <select id="y1">${yopts(state.y1)}</select></label>` : "",
+    A ? `<label>${tx.sev} <select id="sev">${tx.sevopt.map((o, i) => `<option value="${i}" ${i === state.sev ? "selected" : ""}>${o}</option>`).join("")}</select></label>` : "",
+    `<label><input type="checkbox" data-k="d3" ${state.d3 ? "checked" : ""}> ${tx.d3}</label>`].join(""));
+  document.querySelectorAll("#controls input[type=checkbox]").forEach(el => el.onchange = () => { state[el.dataset.k] = el.checked; applyState(); });
+  if (A) {
+    $("y0").onchange = e => { state.y0 = +e.target.value; if (state.y1 < state.y0) state.y1 = state.y0; controls(); applyState(); };
+    $("y1").onchange = e => { state.y1 = +e.target.value; if (state.y0 > state.y1) state.y0 = state.y1; controls(); applyState(); };
+    $("sev").onchange = e => { state.sev = +e.target.value; applyState(); };
+  }
+}
+function legend(p) {
+  const parts = [];
+  if (state.hex && DATA.accidents) {
+    const lab = [`< ${p.b[0]}`].concat(p.b.map((x, i) => i < p.b.length - 1 ? `${x}–${p.b[i + 1] - 1}` : `≥ ${x}`));
+    parts.push(`<div><div style="margin-bottom:4px">${tx.hexleg}</div><div class="ramp">${ORANGE.map((c, i) => `<span title="${lab[i]}"><i style="background:${c}"></i></span>`).join("")}<span>${lab[0]} … ${lab[lab.length - 1]}</span></div></div>`);
+  }
+  if (state.net && DATA.network) {
+    const fs = networkFC().features, used = new Set(fs.filter(f => f.properties.hasS).map(f => f.properties.c)), base = fs.some(f => !f.properties.hasS);
+    parts.push(`<div>${DATA.status.filter(s => used.has(s.code)).map(s => `<span class="item"><span class="line" style="background:${STATUS_COL[s.code]}"></span>${s[L]}</span>`).join("")}${used.has("") ? `<span class="item"><span class="line" style="background:${STATUS_COL[""]}"></span>${tx.nostatus}</span>` : ""}${base ? `<span class="item"><span class="line" style="background:#8a8a84;opacity:.55;height:2px"></span>${tx.basenet}</span>` : ""}</div>`);
+  }
+  if (state.cnt && DATA.counters) parts.push(`<div><span class="item"><span class="dot"></span>${tx.cntleg}</span></div>`);
+  if (state.works && DATA.works) parts.push(`<div><span class="item"><span class="line" style="background:#6E736B"></span>${tx.worksleg}</span></div>`);
+  set("legend", parts.join(""));
+}
+
+/* ---------- accidents per year (stacked bars, three severities) ---------- */
+function accChart() {
+  const A = DATA.accidents; if (!A) { set("accchart", `<div class="empty">${tx.nodata}</div>`); return; }
+  const ys = A.years, W = 540, H = 260, m = {l: 40, r: 8, t: 10, b: 26}, bw = (W - m.l - m.r) / ys.length;
+  const tot = ys.map(y => A.per_year[y].reduce((a, b) => a + b, 0)), max = Math.max(...tot);
+  const sy = v => H - m.b - v / max * (H - m.t - m.b);
+  const cols = [ORANGE[1], ORANGE[3], ORANGE[5]];
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}">`;
+  const step = Math.pow(10, Math.floor(Math.log10(max))) * (max / Math.pow(10, Math.floor(Math.log10(max))) > 4 ? 1 : .5);
+  for (let v = 0; v <= max; v += step) svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${sy(v)}" y2="${sy(v)}" stroke="#DDD8CC"/><text x="${m.l - 6}" y="${sy(v) + 4}" text-anchor="end">${nf(v)}</text>`;
+  ys.forEach((y, i) => {
+    let base = 0; const x = m.l + i * bw + 2, w = Math.max(2, bw - 4), row = A.per_year[y];
+    [0, 1, 2].forEach(s => {
+      const v = row[s]; if (!v) return;
+      const y0 = sy(base), y1 = sy(base + v);
+      svg += `<rect x="${x}" y="${y1}" width="${w}" height="${Math.max(0, y0 - y1 - 1)}" fill="${cols[s]}" rx="1.5"/>`;
+      base += v;
+    });
+    svg += `<rect x="${x - 2}" y="${m.t}" width="${bw}" height="${H - m.t - m.b}" fill="transparent" data-i="${i}"/>`;
+    if (ys.length < 14 || i % 2 === 0) svg += `<text x="${x + w / 2}" y="${H - 8}" text-anchor="middle">${y}</text>`;
+  });
+  svg += `</svg>`;
+  const leg = `<div class="legend">${[2, 1, 0].map(s => `<span class="item"><span class="sw" style="background:${cols[s]}"></span>${tx.sevnames[s]}</span>`).join("")}</div>`;
+  set("accchart", svg + leg);
+  $("accchart").querySelectorAll("rect[data-i]").forEach(r => {
+    const i = +r.dataset.i, row = A.per_year[ys[i]];
+    r.onmousemove = ev => showTip(ev, `<b>${ys[i]}</b>: ${nf(tot[i])}<br>${[2, 1, 0].map(s => `${tx.sevnames[s]}: ${nf(row[s])}`).join("<br>")}`);
+    r.onmouseleave = hideTip;
+  });
+}
+
+/* ---------- network km by status ---------- */
+function netTable() {
+  const N = DATA.network; if (!N || !Object.keys(N.km).length) { set("nettable", `<div class="empty">${tx.nodata}</div>`); set("netintro", ""); return; }
+  set("netintro", tx.netintro(fdate(N.snapshot)) + (N.guessed ? " " + tx.netguess : ""));
+  const rows = DATA.status.filter(s => N.km[s.code]).map(s => `<tr><td><span class="sw" style="background:${STATUS_COL[s.code]}"></span>${s[L]}</td><td class="n">${nf(N.km[s.code], 1)}</td></tr>`);
+  if (N.km["?"]) rows.push(`<tr><td><span class="sw" style="background:${STATUS_COL[""]}"></span>–</td><td class="n">${nf(N.km["?"], 1)}</td></tr>`);
+  set("nettable", `<table class="data"><tr><th>${tx.nethead[0]}</th><th class="n">${tx.nethead[1]}</th></tr>${rows.join("")}</table>`);
+}
+
+/* ---------- counter calendar heat map ---------- */
+function calendarInit() {
+  const C = DATA.counters;
+  if (!C || !C.sites.length) { set("cal", `<div class="empty">${tx.nodata}</div>`); $("calsite").style.display = "none"; return; }
+  set("calsite", C.sites.map(s => `<option value="${s.id}">${esc(s.name)} (${nf(s.mean)})</option>`).join(""));
+  $("calsite").onchange = drawCalendar;
+}
+function drawCalendar() {
+  const C = DATA.counters; if (!C || !C.sites.length) return;
+  const s = C.sites.find(x => x.id === $("calsite").value) || C.sites[0];
+  const start = new Date(s.start + "T00:00:00");
+  const vals = s.v.filter(v => v !== null).sort((a, b) => a - b);
+  const q = p => vals[Math.min(vals.length - 1, Math.floor(p * vals.length))] || 0;
+  const br = [q(.15), q(.3), q(.45), q(.6), q(.75), q(.9)];
+  const colOf = v => { let i = 0; while (i < br.length && v >= br[i]) i++; return BLUE[i]; };
+  const days = s.v.map((v, i) => { const d = new Date(start); d.setDate(d.getDate() + i); return {d, v}; });
+  const years = [...new Set(days.map(x => x.d.getFullYear()))];
+  const cell = 13, gap = 2, padL = 34, rowH = 7 * (cell + gap) + 26;
+  const W = padL + 54 * (cell + gap), H = years.length * rowH;
+  const dpr = window.devicePixelRatio || 1;
+  const cv = document.createElement("canvas"); cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px";
+  const g = cv.getContext("2d"); g.scale(dpr, dpr); g.font = "12px Work Sans, system-ui, sans-serif";
+  const hit = [];
+  years.forEach((y, yi) => {
+    const top = yi * rowH + 20;
+    g.fillStyle = "#3A443E"; g.font = "600 12.5px Work Sans, system-ui, sans-serif"; g.fillText(y, padL, top - 6);
+    g.fillStyle = "#6E736B"; g.font = "11px Work Sans, system-ui, sans-serif";
+    [0, 2, 4].forEach(d => g.fillText(tx.days[d], 0, top + d * (cell + gap) + 10));
+    const jan1 = new Date(y, 0, 1), off = (jan1.getDay() + 6) % 7;
+    for (const {d, v} of days) {
+      if (d.getFullYear() !== y) continue;
+      const doy = Math.round((d - jan1) / 86400000), wd = (d.getDay() + 6) % 7, wk = Math.floor((doy + off) / 7);
+      const x = padL + wk * (cell + gap), yy = top + wd * (cell + gap);
+      g.fillStyle = v === null ? "#ECE8DE" : colOf(v);
+      g.beginPath(); g.roundRect ? g.roundRect(x, yy, cell, cell, 2) : g.rect(x, yy, cell, cell); g.fill();
+      hit.push({x, y: yy, d, v});
+    }
+  });
+  cv.onmousemove = ev => {
+    const r = cv.getBoundingClientRect(), mx = ev.clientX - r.left, my = ev.clientY - r.top;
+    const h = hit.find(c => mx >= c.x - 1 && mx <= c.x + cell + 1 && my >= c.y - 1 && my <= c.y + cell + 1);
+    if (h) showTip(ev, `${tx.days[(h.d.getDay() + 6) % 7]} ${fdate(h.d.toISOString().slice(0, 10))}: <b>${h.v === null ? "–" : nf(h.v)}</b>`); else hideTip();
+  };
+  cv.onmouseleave = hideTip;
+  $("cal").innerHTML = ""; $("cal").appendChild(cv);
+  const lab = [`< ${nf(br[0])}`, ...br.map(b => nf(b))];
+  set("callegend", `<div class="ramp">${tx.calleg}: ${BLUE.map((c, i) => `<span title="${i === 0 ? lab[0] : "≥ " + lab[i]}"><i style="background:${c}"></i></span>`).join("")} <span>${lab[0]} … ≥ ${nf(br[br.length - 1])}</span></div>`);
+}
+
+/* ---------- pace chart ---------- */
+function paceChart() {
+  const s = officialSeries(); if (!s.length) return;
+  const T = DATA.targets, last = s[s.length - 1];
+  const x0 = new Date(s[0].d.getFullYear(), 0, 1), x1 = new Date(T.target_year + 1, 0, 1);
+  const W = 1000, H = 300, m = {l: 44, r: 150, t: 12, b: 28};
+  const sx = d => m.l + (d - x0) / (x1 - x0) * (W - m.l - m.r), sy = v => H - m.b - v / T.network_km * (H - m.t - m.b);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%">`;
+  for (let v = 0; v <= T.network_km; v += 25) svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${sy(v)}" y2="${sy(v)}" stroke="#DDD8CC"/><text x="${m.l - 6}" y="${sy(v) + 4}" text-anchor="end">${v}</text>`;
+  for (let y = x0.getFullYear(); y <= T.target_year + 1; y++) svg += `<text x="${sx(new Date(y, 0, 1))}" y="${H - 8}" text-anchor="middle">${y}</text>`;
+  const end = new Date(T.target_year, 11, 31);
+  svg += `<line x1="${sx(last.d)}" y1="${sy(last.v)}" x2="${sx(end)}" y2="${sy(T.network_km)}" stroke="#6E736B" stroke-width="2" stroke-dasharray="5 5"/>`;
+  svg += `<text x="${sx(end) + 8}" y="${sy(T.network_km) + 4}">${tx.pacelab[1]}</text>`;
+  svg += `<polyline fill="none" stroke="#c9521f" stroke-width="2" points="${s.map(p => `${sx(p.d)},${sy(p.v)}`).join(" ")}"/>`;
+  s.forEach((p, i) => svg += `<circle cx="${sx(p.d)}" cy="${sy(p.v)}" r="5" fill="#c9521f" stroke="#F5F2EA" stroke-width="2" data-i="${i}"/>`);
+  svg += `<text x="${sx(last.d) - 4}" y="${sy(last.v) - 14}" text-anchor="end" fill="#3A443E">${nf(last.v, 2)} km · ${tx.pacelab[0]}</text></svg>`;
+  set("pacechart", svg);
+  $("pacechart").querySelectorAll("circle").forEach(c => {
+    const p = s[+c.dataset.i];
+    c.onmousemove = ev => showTip(ev, `${fdate(p.r.date)}: <b>${nf(p.v, 2)} km</b><br>${esc(p.r.source_title)}`); c.onmouseleave = hideTip;
+  });
+}
+
+/* ---------- sources ---------- */
+function sourcesList() {
+  const items = (DATA.sources || []).map(s => `<li>${esc(L === "de" ? s.title_de : s.title_en)} – ${esc(s.publisher || "")}. ${tx.loaded} ${fdate(s.date)}. ${esc(s.licence || "")}. <a href="https://data.stadt-zuerich.ch/dataset/${esc(s.dataset_id || "")}">data.stadt-zuerich.ch</a></li>`);
+  const off = [...new Map((DATA.official || []).map(r => [r.source_url, r])).values()].map(r => `<li>${esc(r.source_title)} – <a href="${esc(r.source_url)}">${esc(new URL(r.source_url).hostname)}</a></li>`);
+  set("sources", items.concat(off).join(""));
+  set("author", tx.author + " " + tx.built(fdate(DATA.built)));
+}
+
+function render(lang) {
+  L = LANGS.includes(lang) ? lang : "de"; tx = TX[L];
+  document.documentElement.lang = L; document.title = tx.title;
+  set("lang", LANGS.map(l => `<a href="#${l}" class="${l === L ? "on" : ""}">${l.toUpperCase()}</a>`).join(""));
+  for (const k of ["title", "lede", "maptitle", "mapintro", "acctitle", "accintro", "nettitle", "caltitle", "callabel", "pacetitle", "paceintro", "methodtitle", "srctitle"]) set(k, tx[k]);
+  set("calintro", tx.calintro(DATA.counters && DATA.counters.corrected));
+  set("method", tx.method.map(p => `<p>${p}</p>`).join(""));
+  set("mapnote", tx.mapnote(DATA.network ? fdate(DATA.network.snapshot) : "–"));
+  headline(); controls(); accChart(); netTable(); drawCalendar(); paceChart(); sourcesList();
+  if (map && map.getSource("hex")) applyState();
+}
+
+if (DATA.accidents) { const ys = DATA.accidents.years; state.y1 = ys[ys.length - 1]; state.y0 = ys[Math.max(0, ys.length - 5)]; }
+calendarInit();
+const fromHash = () => location.hash.slice(1).toLowerCase();
+window.addEventListener("hashchange", () => render(fromHash()));
+render(fromHash() || ((navigator.language || "de").slice(0, 2) === "en" ? "en" : "de"));
+initMap();
+</script>
+</body>
+</html>

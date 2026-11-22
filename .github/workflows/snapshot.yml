@@ -1,0 +1,28 @@
+# Weekly snapshot of the Zurich bike network (Monday 06:00 Swiss time).
+# Copied into the repository as .github/workflows/snapshot.yml by 4_Publish_to_GitHub.bat.
+name: Weekly network snapshot
+on:
+  schedule:
+    - cron: "7 5 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download layers
+        env:
+          SNAPSHOT_DIR: ${{ github.workspace }}
+        run: python project/02_Analysis/snapshot_network.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "velo-snapshot-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add snapshots city_page
+          git diff --cached --quiet || git commit -m "Snapshot $(date +%F)"
+          git push

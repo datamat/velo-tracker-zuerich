@@ -1,0 +1,10 @@
+key,dataset_id,search,kind,use,title_de,title_en,publisher,licence
+velonetz,geo_velonetzplanung,Velonetzplanung,geo,yes,Velonetzplanung (Velovorzugsrouten),Bike network planning (priority routes),"Stadt Zürich, Tiefbauamt",CC0 / opendata.swiss terms
+tiefbau,geo_aktuelle_tiefbauprojekte_im_oeffentlichen_grund,Aktuelle Tiefbauprojekte im öffentlichen Grund,geo,yes,Aktuelle Tiefbauprojekte,Current civil-engineering projects,"Stadt Zürich, Baukoordination",CC0 / opendata.swiss terms
+zaehlstellen,geo_standorte_der_automatischen_fuss__und_velozaehlungen,Standorte der automatischen Fuss- und Velozählungen,geo,yes,Standorte der Velozählungen,Bike counting sites,"Stadt Zürich, Tiefbauamt",CC0 / opendata.swiss terms
+zaehlwerte,ted_taz_verkehrszaehlungen_werte_fussgaenger_velo,Daten der automatischen Fussgänger- und Velozählung,counts,yes,Velozählungen (Viertelstundenwerte),Bike counts (15-minute values),"Stadt Zürich, Tiefbauamt",CC0 / opendata.swiss terms
+unfaelle,sid_dav_strassenverkehrsunfallorte,Strassenverkehrsunfälle mit Personenschaden,table,yes,Polizeilich registrierte Verkehrsunfälle,Police-registered road accidents,"Stadt Zürich, Dienstabteilung Verkehr; Bundesamt für Strassen ASTRA",CC BY – Quelle: Bundesamt für Strassen ASTRA
+velowegnetz,geo_fuss__und_velowegnetz,Fuss- und Velowegnetz,geo,yes,Fuss- und Velowegnetz,Foot and bike path network,Stadt Zürich,CC0 / opendata.swiss terms
+masterplan,geo_masterplan_velo,Masterplan Velo,geo,yes,Masterplan Velo (2018),Bike masterplan (2018),Stadt Zürich,CC0 / opendata.swiss terms
+vbz_baustellen,geo_vbz_baustellen,VBZ-Baustellen,geo,yes,VBZ-Baustellen,VBZ construction sites,VBZ,CC0 / opendata.swiss terms
+zweirad,geo_zweiradparkierung,Zweiradparkierung,geo,no,Zweiradparkierung,Two-wheeler parking,Stadt Zürich,CC0 / opendata.swiss terms

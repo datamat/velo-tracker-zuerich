@@ -1,0 +1,6 @@
+date,metric,value,unit,definition,source_title,source_url
+2024-09-01,implemented,4,km,"VVR implemented incl. green marking","Stadt Zürich, Medienmitteilung Sep 2024",https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2024/09/schritt-fuer-schritt-zur-velostadt-jaehrlicher-bericht-zur-velofoerderung-liegt-vor.html
+2025-11-01,implemented,4.3,km,"VVR implemented incl. green marking","Stadt Zürich, Medienmitteilung Nov 2025",https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2025/11/velofoerderung-nimmt-weiter-fahrt-auf.html
+2026-11-20,implemented,7.17,km,"VVR implemented (city counter)","Stadt Zürich, Velovorzugsrouten (Stand 20.11.2026)",https://www.stadt-zuerich.ch/de/mobilitaet/velo/velovorzugsrouten.html
+2026-11-20,network_target,130,km,"planned VVR network","Stadt Zürich, Velovorzugsrouten (Stand 20.11.2026)",https://www.stadt-zuerich.ch/de/mobilitaet/velo/velovorzugsrouten.html
+2026-11-20,initiative_target,50,km,"minimum under the initiative ""Sichere Velorouten für Zürich""","Stadt Zürich, Velovorzugsrouten (Stand 20.11.2026)",https://www.stadt-zuerich.ch/de/mobilitaet/velo/velovorzugsrouten.html
