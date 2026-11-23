@@ -1,0 +1,10 @@
+{
+ "dataset": "geo_velonetzplanung",
+ "title": "Velonetzplanung",
+ "metadata_modified": "2026-11-23T08:00:18.095400",
+ "downloaded": "2026-11-23",
+ "files": {
+  "velonetz__view_gs_umsetzungsstrecken.geojson": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Velonetzplanung (layer view_gs_umsetzungsstrecken)",
+  "velonetz__view_velonetz.geojson": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Velonetzplanung (layer view_velonetz)"
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "dataset": "geo_aktuelle_tiefbauprojekte_im_oeffentlichen_grund",
+ "title": "Aktuelle Tiefbauprojekte im öffentlichen Grund",
+ "metadata_modified": "2026-11-23T07:47:25.785640",
+ "downloaded": "2026-11-23",
+ "files": {
+  "tiefbau__aer_baustellen_a.geojson": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Aktuelle_Tiefbauprojekte_im_oeffentlichen_Grund (layer aer_baustellen_a)"
+ }
+}
